@@ -1,6 +1,7 @@
 ## RNN Learning
 ### Using tf.SequenceExample: 
 * preprocess the data for RNN input 
+
 ### Batching and Padding Date:
 * make the inputs having the same size by padding them
 

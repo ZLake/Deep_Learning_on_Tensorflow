@@ -7,7 +7,7 @@
 ## RNN Learning  
 * Some RNN practice   
 
-## CNN Leraning 
+## CNN Learning 
 * Some CNN practice  
 
 ## Famous Networks 

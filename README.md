@@ -8,7 +8,10 @@
 * Some RNN practice   
 
 ## CNN Learning 
-* Some CNN practice  
+* Some CNN practice   
+
+## RL Learning
+* Some RL practice  
 
 ## Famous Networks 
 * Implementations of the homework for famours network structures  

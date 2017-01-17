@@ -90,13 +90,13 @@ with graph.as_default():
     keep_prob = tf.placeholder(tf.float32)
 
     # Variables.
-    layer1_weights = weight_variable([3, 3, num_channels, 32]) # conv kernel
-    layer1_biases = bias_variable([32])
+    layer1_weights = weight_variable([3, 3, num_channels, 8]) # conv kernel
+    layer1_biases = bias_variable([8])
     
-    layer2_weights = weight_variable([5, 5, 32, 64])   # conv kernel
-    layer2_biases = bias_variable([64])
-    
-    layer3_weights = weight_variable([image_size // 4 * image_size // 4 * 64, num_hidden])
+    layer2_weights = weight_variable([3, 3, 8, 16])   # conv kernel
+    layer2_biases = bias_variable([16])
+ 
+    layer3_weights = weight_variable([image_size // 4 * image_size // 4 * 16, num_hidden])
     layer3_biases = bias_variable([num_hidden])
     
     layer4_weights = weight_variable([num_hidden, num_labels])

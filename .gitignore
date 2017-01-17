@@ -89,8 +89,9 @@ ENV/
 .ropeproject
 
 # files to ignore
-Udacity Course Homeworks/HW1-4/*.gz
-Udacity Course Homeworks/notMNIST_large/
-Udacity Course Homeworks/notMNIST_small/
-Udacity Course Homeworks/*.pickle
-Udacity Course Homeworks/HW1-4/notMNIST.pickle
+Udacity_Course_Homeworks/HW1-4/*.gz
+Udacity_Course_Homeworks/notMNIST_large/
+Udacity_Course_Homeworks/notMNIST_small/
+Udacity_Course_Homeworks/*.pickle
+Udacity_Course_Homeworks/HW1-4/notMNIST.pickle
+Udacity_Course_Homeworks/HW5-6/text8.zip

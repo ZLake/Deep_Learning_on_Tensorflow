@@ -87,3 +87,9 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# files to ignore
+/Udacity Course Homeworks/HW1-4/*.gz
+/Udacity Course Homeworks/notMNIST_large/*
+/Udacity Course Homeworks/notMNIST_small/*
+

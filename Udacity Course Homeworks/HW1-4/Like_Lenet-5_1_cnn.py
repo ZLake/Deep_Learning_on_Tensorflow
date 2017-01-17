@@ -51,8 +51,8 @@ num_labels = 10
 num_channels = 1  # grayscale
 
 batch_size = 16
-patch_size = 5
-depth = 16
+#patch_size = 5 # not really used, finetune your network for fun!
+#depth = 16 # not really used, finetune your network for fun!
 num_hidden = 1024
 
 pickle_file = 'notMNIST.pickle'
@@ -90,10 +90,10 @@ with graph.as_default():
     keep_prob = tf.placeholder(tf.float32)
 
     # Variables.
-    layer1_weights = weight_variable([patch_size, patch_size, num_channels, 32])
+    layer1_weights = weight_variable([3, 3, num_channels, 32]) # conv kernel
     layer1_biases = bias_variable([32])
     
-    layer2_weights = weight_variable([patch_size, patch_size, 32, 64])
+    layer2_weights = weight_variable([5, 5, 32, 64])   # conv kernel
     layer2_biases = bias_variable([64])
     
     layer3_weights = weight_variable([image_size // 4 * image_size // 4 * 64, num_hidden])
@@ -157,7 +157,7 @@ with tf.Session(graph=graph) as session:
         feed_dict = {tf_train_dataset: batch_data, tf_train_labels: batch_labels, keep_prob:0.5}
         _, l, predictions = session.run(
             [optimizer, loss, train_prediction], feed_dict=feed_dict)
-        if (step % 50 == 0):
+        if (step % 100 == 0):
             print('Minibatch loss at step %d: %f' % (step, l))
             print('Minibatch accuracy: %.1f%%' % accuracy(predictions, batch_labels))
             print('Validation accuracy: %.1f%%' % accuracy(

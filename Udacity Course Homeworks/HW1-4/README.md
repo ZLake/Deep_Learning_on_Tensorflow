@@ -3,8 +3,9 @@
 * You can download notMNIST_large.tar.gz and notMNIST_small.tar.gz from http://commondatastorage.googleapis.com/books1000/notMNIST_large.tar.gz and http://commondatastorage.googleapis.com/books1000/notMNIST_small.tar.gz.
 
 ### Neural Network
-put notMNIST.pickle in the folder, you can run:
+put notMNIST.pickle in the folder and run notMNIST_simple.py first, then you can run:
 * simple NN
 * simple NN with regularization
 * 2-layer NN (MLP) (with regularization and dropout) 
 * simple CNN (with maxpooling and learning rate decay)
+* lenet-5 CNN

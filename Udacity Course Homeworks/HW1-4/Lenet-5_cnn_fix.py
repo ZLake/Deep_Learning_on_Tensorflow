@@ -105,15 +105,22 @@ with graph.as_default():
 
     # Model.
     def model(data,use_dropout = False):
-        conv1 = tf.nn.conv2d(data, layer1_weights, [1, 1, 1, 1], padding='SAME')
+        # convolution layer 1
+        
+        conv1 = conv2d(data, layer1_weights)
         hidden1 = tf.nn.relu(conv1 + layer1_biases)
         hidden1_pool = max_pool_2x2(hidden1)
-        conv2 = tf.nn.conv2d(hidden1_pool, layer2_weights, [1, 1, 1, 1], padding='SAME')
+        # convolution layer 2
+        
+        conv2 = conv2d(hidden1_pool, layer2_weights)
         hidden2 = tf.nn.relu(conv2 + layer2_biases)
         hidden2_pool = max_pool_2x2(hidden2)
+        
+        # full connection layer
         shape = hidden2_pool.get_shape().as_list()
         reshape = tf.reshape(hidden2_pool, [shape[0], shape[1] * shape[2] * shape[3]])
         hidden3 = tf.nn.relu(tf.matmul(reshape, layer3_weights) + layer3_biases)
+        # dropout
         if (use_dropout):
             return tf.matmul(tf.nn.dropout(hidden3,keep_prob), layer4_weights) + layer4_biases
         else:
@@ -121,7 +128,7 @@ with graph.as_default():
 
 
     # Training computation.
-    logits = model(tf_train_dataset,use_dropout = True)
+    logits = model(tf_train_dataset,use_dropout = True) # only training uses dropout
     loss = tf.reduce_mean(
         tf.nn.softmax_cross_entropy_with_logits(labels=tf_train_labels, logits=logits))
     # learning rate decay

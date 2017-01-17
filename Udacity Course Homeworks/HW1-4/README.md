@@ -1,9 +1,8 @@
 # Homework 1 
-* Please follow the code in https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/udacity/1_notmnist.ipynb to generate notMNIST.pickle for later training.
-* You can download notMNIST_large.tar.gz and notMNIST_small.tar.gz from http://commondatastorage.googleapis.com/books1000/notMNIST_large.tar.gz and http://commondatastorage.googleapis.com/books1000/notMNIST_small.tar.gz.
-
+* Please run notMNIST_simple.py first to download notMNIST data and generate notMNIST.pickle for later training.
+* You can modify the train,valid and test size in notMNIST_simple.py. 
 ### Neural Network
-put notMNIST.pickle in the folder and run notMNIST_simple.py first, then you can run:
+Once notMNIST.pickle is generated, then you can run:
 * simple NN
 * simple NN with regularization
 * 2-layer NN (MLP) (with regularization and dropout) 

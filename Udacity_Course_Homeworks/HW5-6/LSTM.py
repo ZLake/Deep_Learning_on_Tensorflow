@@ -151,6 +151,7 @@ valid_batches = BatchGenerator(valid_text, 1, 1)
 
 print(batches2string(train_batches.next()))
 print(batches2string(train_batches.next()))
+print(len(train_batches.next()))
 print(batches2string(valid_batches.next()))
 print(batches2string(valid_batches.next()))
 
@@ -182,9 +183,9 @@ with graph.as_default():
   om = tf.Variable(tf.truncated_normal([num_nodes, num_nodes], -0.1, 0.1))
   ob = tf.Variable(tf.zeros([1, num_nodes]))
   # Concatenate parameters  
-  sx = tf.concat(1, [ix, fx, cx, ox])
-  sm = tf.concat(1, [im, fm, cm, om])
-  sb = tf.concat(1, [ib, fb, cb, ob])
+  sx = tf.concat_v2( [ix, fx, cx, ox],1)
+  sm = tf.concat_v2( [im, fm, cm, om],1)
+  sb = tf.concat_v2( [ib, fb, cb, ob],1)
   # Variables saving state across unrollings.
   saved_output = tf.Variable(tf.zeros([batch_size, num_nodes]), trainable=False)
   saved_state = tf.Variable(tf.zeros([batch_size, num_nodes]), trainable=False)
@@ -198,7 +199,7 @@ with graph.as_default():
     Note that in this formulation, we omit the various connections between the
     previous state and the gates."""
     smatmul = tf.matmul(i,sx) + tf.matmul(o,sm) + sb
-    smatmul_input, smatmul_forget, update, smatmul_output = tf.split(1, 4, smatmul)
+    smatmul_input, smatmul_forget, update, smatmul_output = tf.split(smatmul,4,1 )
     input_gate = tf.sigmoid(smatmul_input)
     forget_gate = tf.sigmoid(smatmul_forget)
     output_gate = tf.sigmoid(smatmul_output)
@@ -232,7 +233,7 @@ with graph.as_default():
     logits = tf.nn.xw_plus_b(tf.concat(0, outputs), w, b)
     loss = tf.reduce_mean(
       tf.nn.softmax_cross_entropy_with_logits(
-        logits, tf.concat(0, train_labels)))
+        logits = logits, labels = tf.concat(0, train_labels)))
 
   # Optimizer.
   global_step = tf.Variable(0)

@@ -219,7 +219,7 @@ with graph.as_default():
         Note that in this formulation, we omit the various connections between the
         previous state and the gates."""
         smatmul = tf.matmul(i, sx) + tf.matmul(o, sm) + sb
-        smatmul_input, smatmul_forget, update, smatmul_output = tf.split(smatmul, 4, 1)
+        smatmul_input, smatmul_forget, update, smatmul_output = tf.split(1,4,smatmul)
         input_gate = tf.sigmoid(smatmul_input)
         forget_gate = tf.sigmoid(smatmul_forget)
         output_gate = tf.sigmoid(smatmul_output)
@@ -253,10 +253,10 @@ with graph.as_default():
     with tf.control_dependencies([saved_output.assign(output),
                                   saved_state.assign(state)]):
         # Classifier.
-        logits = tf.nn.xw_plus_b(tf.concat_v2(outputs,0), w, b)
+        logits = tf.nn.xw_plus_b(tf.concat(0,outputs), w, b)
         loss = tf.reduce_mean(
             tf.nn.softmax_cross_entropy_with_logits(
-                logits = logits, labels = tf.concat_v2(train_labels,0)))
+                logits = logits, labels = tf.concat(0,train_labels)))
 
     # Optimizer.
     global_step = tf.Variable(0)

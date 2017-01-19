@@ -95,3 +95,5 @@ Udacity_Course_Homeworks/notMNIST_small/
 Udacity_Course_Homeworks/*.pickle
 Udacity_Course_Homeworks/HW1-4/notMNIST.pickle
 Udacity_Course_Homeworks/HW5-6/text8.zip
+Famous Networks/Google's_rnn_PTBdata/simple-examples.tar
+Famous Networks/Google's_rnn_PTBdata/simple-examples/

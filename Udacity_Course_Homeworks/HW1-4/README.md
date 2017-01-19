@@ -1,4 +1,6 @@
 # Homework 1 
+#### tf version 0.12
+
 * Please run notMNIST_simple.py first to download notMNIST data and generate notMNIST.pickle for later training.
 * You can modify the train,valid and test size in notMNIST_simple.py. 
 

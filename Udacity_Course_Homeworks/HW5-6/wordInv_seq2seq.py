@@ -169,7 +169,7 @@ def create_model(sess, forward_only):
 
 with tf.Session() as sess:
     model = create_model(sess, False)
-    sess.run(tf.global_variables_initializer())
+    sess.run(tf.initialize_all_variables())
     num_steps = 30001
 
     # This is the training loop.

@@ -14,14 +14,37 @@ from keras.optimizers import sgd
 
 
 class Catch(object):
+    # canvas[state[0], state[1]] = 1  # draw fruit
+    # canvas[-1, state[2]-1:state[2] + 2] = 1  # draw basket
     def __init__(self, grid_size=15):
         self.grid_size = grid_size
         self.reset()
 
+#    def _update_state(self, action):
+#        """
+#        Input: action and states
+#        Ouput: new states and reward
+#        """
+#        state = self.state
+#        if action == 0:  # left
+#            action = -1
+#        elif action == 1:  # stay
+#            action = 0
+#        else:
+#            action = 1  # right
+#        f0, f1, basket = state[0]
+#        new_basket = min(max(1, basket + action), self.grid_size-1)
+#        f0 += 1
+#        out = np.asarray([f0, f1, new_basket])
+#        out = out[np.newaxis]
+#
+#        assert len(out.shape) == 2
+#        self.state = out
     def _update_state(self, action):
         """
         Input: action and states
         Ouput: new states and reward
+        The fruit can move horizontally
         """
         state = self.state
         if action == 0:  # left
@@ -32,6 +55,18 @@ class Catch(object):
             action = 1  # right
         f0, f1, basket = state[0]
         new_basket = min(max(1, basket + action), self.grid_size-1)
+        
+        df1=np.random.randint(0,3,1)
+        if df1==0:
+            f1-=1
+        elif df1==2:
+            f1+=1
+        else:
+            pass
+        if f1>self.grid_size-1:
+            f1=self.grid_size-1
+        if f1<0:
+            f1=0
         f0 += 1
         out = np.asarray([f0, f1, new_basket])
         out = out[np.newaxis]
@@ -56,13 +91,33 @@ class Catch(object):
                 return -1
         else:
             return 0
-    # not checked, basket should w8 under the fruit
-    def _get_reward_2nd(self):
-        fruit_row, fruit_col, basket = self.state[0]
-        if abs(fruit_col - basket) <= 1:
-            return 1
-        else:
-            return -1
+     not checked, basket should w8 under the fruit
+#    def _get_reward(self):
+#        '''
+#        put basket under the fruit will get the reward
+#        '''
+#        fruit_row, fruit_col, basket = self.state[0]
+#        if abs(fruit_col - basket) <= 1:
+#            return 1
+#        else:
+#            return -1
+            
+#    def _get_reward(self):
+#        '''
+#        put basket under the fruit will get the reward
+#        get the fruit will get 5 pts
+#        '''
+#        fruit_row, fruit_col, basket = self.state[0]
+#        if fruit_row == self.grid_size-1:
+#            if abs(fruit_col - basket) <= 1:
+#                return 5
+#            else:
+#                return -5
+#        else:
+#            if abs(fruit_col - basket) <= 1:
+#                return 1
+#            else:
+#                return -1
 
     def _is_over(self):
         if self.state[0, 0] == self.grid_size-1:
@@ -130,7 +185,7 @@ if __name__ == "__main__":
     max_memory = 500
     hidden_size = 100
     batch_size = 50
-    grid_size = 15
+    grid_size = 10
 
     model = Sequential()
     model.add(Dense(hidden_size, input_shape=(grid_size**2,), activation='relu'))
@@ -154,6 +209,7 @@ if __name__ == "__main__":
         env.reset()
         game_over = False
         # get initial input
+        canvas = env._draw_state() # the game
         input_t = env.observe()
 
         while not game_over:

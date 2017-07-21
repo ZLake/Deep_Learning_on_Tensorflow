@@ -15,7 +15,7 @@ from qlearn import Catch
 
 if __name__ == "__main__":
     # Make sure this grid size matches the value used for training
-    grid_size = 15
+    grid_size = 10
 
     with open("model.json", "r") as jfile:
         model = model_from_json(json.load(jfile))
